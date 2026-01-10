@@ -2,10 +2,13 @@ package service
 
 import (
 	"checkme/config"
+	"checkme/internal/dto"
 	"checkme/internal/repository"
+	"context"
 )
 
 type RecordService interface {
+	Update(ctx context.Context, req *dto.UploadRecordRequest) error
 }
 
 type recordService struct {
@@ -18,4 +21,9 @@ func NewRecoderService(recoderRepo repository.RecordRepository, cfg *config.Conf
 		recordRepo: recoderRepo,
 		cfg:        cfg,
 	}
+}
+
+func (rs recordService) Update(ctx context.Context, req *dto.UploadRecordRequest) error {
+
+	return nil
 }
