@@ -2,13 +2,13 @@ package repository
 
 import "gorm.io/gorm"
 
-type UserRepository interface {
+type RecordRepository interface {
 }
 
-type userRepository struct {
+type recordRepository struct {
 	db *gorm.DB
 }
 
-func NewUserRepository(db *gorm.DB) UserRepository {
-	return &userRepository{db: db}
+func NewUserRepository(db *gorm.DB) RecordRepository {
+	return &recordRepository{db: db}
 }

@@ -5,16 +5,16 @@ import (
 	"checkme/internal/repository"
 )
 
-type RecoderService interface {
+type RecordService interface {
 }
 
-type recoderService struct {
-	recordRepo repository.UserRepository
+type recordService struct {
+	recordRepo repository.RecordRepository
 	cfg        *config.Config
 }
 
-func NewRecoderService(recoderRepo repository.UserRepository, cfg *config.Config) RecoderService {
-	return &recoderService{
+func NewRecoderService(recoderRepo repository.RecordRepository, cfg *config.Config) RecordService {
+	return &recordService{
 		recordRepo: recoderRepo,
 		cfg:        cfg,
 	}

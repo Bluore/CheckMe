@@ -2,8 +2,13 @@ package cmd
 
 import (
 	"checkme/config"
+	"checkme/internal/api/handler"
+	"checkme/internal/api/router"
+	"checkme/internal/repository"
+	"checkme/internal/service"
 	"fmt"
 
+	"github.com/gin-gonic/gin"
 	"gorm.io/gorm"
 )
 
@@ -24,5 +29,20 @@ func Start() {
 	}
 
 	//创建仓库层
+	recordRepo := repository.NewUserRepository(db)
+	//创建服务层
+	recordService := service.NewRecoderService(recordRepo, conf)
+	//创建处理器
+	h := handler.NewHandler(recordService)
+
+	//设置Gin模式
+	gin.SetMode(conf.Server.Mode)
+
+	//创建路由
+	r := gin.Default()
+
+	router.Setup(r, h, conf)
+
+	r.Run(fmt.Sprintf(":%d", conf.Server.Port))
 
 }
