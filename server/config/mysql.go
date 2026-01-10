@@ -1,6 +1,7 @@
 package config
 
 import (
+	"checkme/internal/model"
 	"errors"
 	"fmt"
 
@@ -24,6 +25,11 @@ func InitMysql(conf *Config) (*gorm.DB, error) {
 
 	if err != nil {
 		return nil, errors.New(fmt.Sprintf("MySql连接失败:%v", err))
+	}
+
+	err = db.AutoMigrate(&model.Record{})
+	if err != nil {
+		return nil, errors.New(fmt.Sprintf("record数据库自动迁移失败:%v", err))
 	}
 
 	return db, nil
