@@ -35,7 +35,7 @@ func (rs recordService) Update(ctx context.Context, req *dto.UploadRecordRequest
 	}
 
 	// 更新记录
-	if record.Application == req.Application {
+	if record != nil && record.Application == req.Application {
 		// 当仍在上个应用时更新时长
 		record.UpdatedTime = *req.Time
 		err := rs.recordRepo.Update(ctx, record)
@@ -44,16 +44,25 @@ func (rs recordService) Update(ctx context.Context, req *dto.UploadRecordRequest
 		}
 	} else {
 		// 切换应用时添加记录
+		startTime := req.Time.Add(-5 * time.Minute)
+		if record != nil {
+			if req.Time.Sub(record.StartTime).Minutes() <= 5.0 {
+				startTime = record.UpdatedTime
+			}
+		}
+
 		rec := model.Record{
 			Device:      req.Device,
 			Application: req.Application,
 			UpdatedTime: *req.Time,
-			StartTime:   record.UpdatedTime,
+			StartTime:   startTime,
 			DeletedAt:   gorm.DeletedAt{},
 		}
-		if rec.UpdatedTime.Sub(rec.StartTime).Minutes() > 5.0 {
-			rec.StartTime = rec.UpdatedTime.Add(-5 * time.Minute)
+
+		if rec.UpdatedTime.Sub(rec.StartTime).Milliseconds() < 0 {
+			return errors.New("时间错误，请检查时区")
 		}
+
 		err := rs.recordRepo.Create(ctx, &rec)
 		if err != nil {
 			return err

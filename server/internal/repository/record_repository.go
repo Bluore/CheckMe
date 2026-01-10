@@ -3,6 +3,7 @@ package repository
 import (
 	"checkme/internal/model"
 	"context"
+	"errors"
 
 	"gorm.io/gorm"
 )
@@ -28,9 +29,9 @@ func (r *recordRepository) Create(ctx context.Context, record *model.Record) err
 
 func (r *recordRepository) GetByID(ctx context.Context, id string) (*model.Record, error) {
 	var record model.Record
-	err := r.db.WithContext(ctx).Where("id = ?", id).Error
+	err := r.db.WithContext(ctx).Where("id = ?", id).First(&record).Error
 	if err != nil {
-		if err == gorm.ErrRecordNotFound {
+		if errors.Is(err, gorm.ErrRecordNotFound) {
 			return nil, nil
 		}
 		return nil, err
@@ -40,9 +41,9 @@ func (r *recordRepository) GetByID(ctx context.Context, id string) (*model.Recor
 
 func (r *recordRepository) GetLastByDevice(ctx context.Context, device string) (*model.Record, error) {
 	var record model.Record
-	err := r.db.WithContext(ctx).Order("updated_time DESC").Where("device = ?", device).Error
+	err := r.db.WithContext(ctx).Order("updated_time DESC").Where("device = ?", device).First(&record).Error
 	if err != nil {
-		if err == gorm.ErrRecordNotFound {
+		if errors.Is(err, gorm.ErrRecordNotFound) {
 			return nil, nil
 		}
 		return nil, err

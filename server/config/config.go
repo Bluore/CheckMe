@@ -1,6 +1,8 @@
 package config
 
 import (
+	"time"
+
 	"github.com/spf13/viper"
 )
 
@@ -50,6 +52,8 @@ func Load() (*Config, error) {
 	if err := viper.Unmarshal(&config); err != nil {
 		return nil, err
 	}
+
+	time.LoadLocation("Asia/Shanghai")
 
 	return &config, nil
 }
