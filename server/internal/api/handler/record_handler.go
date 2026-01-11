@@ -8,6 +8,7 @@ import (
 	"time"
 
 	"github.com/gin-gonic/gin"
+	"github.com/gin-gonic/gin/binding"
 )
 
 type Handler struct {
@@ -21,7 +22,7 @@ func NewHandler(recoderService service.RecordService) *Handler {
 // UploadRecord 创建记录
 func (h *Handler) UploadRecord(c *gin.Context) {
 	var req dto.UploadRecordRequest
-	if err := c.ShouldBindJSON(&req); err != nil {
+	if err := c.ShouldBindBodyWith(&req, binding.JSON); err != nil {
 		fmt.Println(req)
 		response.Fail(c, response.ParamMissing)
 		return
