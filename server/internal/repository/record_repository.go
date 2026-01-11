@@ -12,6 +12,7 @@ type RecordRepository interface {
 	Create(ctx context.Context, record *model.Record) error
 	GetByID(ctx context.Context, id string) (*model.Record, error)
 	GetLastByDevice(ctx context.Context, device string) (*model.Record, error)
+	GetDevice(ctx context.Context) (*[]string, error)
 	Update(ctx context.Context, record *model.Record) error
 }
 
@@ -53,4 +54,13 @@ func (r *recordRepository) GetLastByDevice(ctx context.Context, device string) (
 
 func (r *recordRepository) Update(ctx context.Context, record *model.Record) error {
 	return r.db.WithContext(ctx).Save(record).Error
+}
+
+func (r *recordRepository) GetDevice(ctx context.Context) (*[]string, error) {
+	var devices []string
+	err := r.db.WithContext(ctx).Model(&model.Record{}).Distinct("device").Pluck("device", &devices).Error
+	if err != nil {
+		return nil, err
+	}
+	return &devices, nil
 }

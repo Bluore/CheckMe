@@ -16,6 +16,7 @@ func Setup(r *gin.Engine, h *handler.Handler, cfg *config.Config) {
 		record := v1.Group("/record")
 		{
 			record.POST("", h.UploadRecord)
+			record.GET("", h.GetLastRecord)
 		}
 	}
 }

@@ -14,6 +14,7 @@ import (
 
 type RecordService interface {
 	Update(ctx context.Context, req *dto.UploadRecordRequest) error
+	GetLastRecord(ctx context.Context) (*dto.GetLastRecordResponse, error)
 }
 
 type recordService struct {
@@ -69,4 +70,31 @@ func (rs recordService) Update(ctx context.Context, req *dto.UploadRecordRequest
 		}
 	}
 	return nil
+}
+
+func (rs recordService) GetLastRecord(ctx context.Context) (*dto.GetLastRecordResponse, error) {
+	var res dto.GetLastRecordResponse
+	// 查询phone和computer设备
+	for _, v := range []string{"phone", "computer"} {
+		device, err := rs.recordRepo.GetLastByDevice(ctx, v)
+		if err != nil {
+			return nil, err
+		}
+		if device == nil {
+			res.DeviceList = append(res.DeviceList,
+				dto.DeviceRecord{
+					Device:      v,
+					Application: "没有相关记录",
+					StartTime:   time.Time{},
+					UpdateTime:  time.Time{},
+				},
+			)
+		} else {
+			res.DeviceList = append(res.DeviceList,
+				device.ToDeviceRecord(),
+			)
+		}
+	}
+
+	return &res, nil
 }

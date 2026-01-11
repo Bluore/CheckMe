@@ -32,6 +32,12 @@ func (h *Handler) UploadRecord(c *gin.Context) {
 		req.Time = &now
 	}
 
+	// 仅支持phone、computer
+	if req.Device != "phone" && req.Device != "computer" {
+		response.Error(c, 400, "不支持的设备")
+		return
+	}
+
 	err := h.recordService.Update(c, &req)
 	if err != nil {
 		response.Fail(c, response.ServerError)
@@ -39,4 +45,15 @@ func (h *Handler) UploadRecord(c *gin.Context) {
 	}
 
 	response.Success(c, nil)
+}
+
+// GetLastRecord 获取最近在线情况
+func (h *Handler) GetLastRecord(c *gin.Context) {
+	devices, err := h.recordService.GetLastRecord(c)
+	if err != nil {
+		response.Fail(c, response.ServerError)
+		return
+	}
+
+	response.Success(c, devices)
 }

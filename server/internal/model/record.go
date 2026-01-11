@@ -1,6 +1,7 @@
 package model
 
 import (
+	"checkme/internal/dto"
 	"time"
 
 	"gorm.io/gorm"
@@ -17,4 +18,13 @@ type Record struct {
 
 func (Record) TableName() string {
 	return "records"
+}
+
+func (r *Record) ToDeviceRecord() dto.DeviceRecord {
+	return dto.DeviceRecord{
+		Device:      r.Device,
+		Application: r.Application,
+		StartTime:   r.StartTime,
+		UpdateTime:  r.UpdatedTime,
+	}
 }
