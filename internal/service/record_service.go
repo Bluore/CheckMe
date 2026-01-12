@@ -39,7 +39,7 @@ func (rs recordService) Update(ctx context.Context, req *dto.UploadRecordRequest
 		return errors.New("数据库查询出错")
 	}
 
-	data, err := change.ChangeData(rs.cov, req.Data, req.Application)
+	data, err := change.ChangeData(ctx, rs.cov, req, ip)
 	if err != nil {
 		return err
 	}
