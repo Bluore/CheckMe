@@ -12,6 +12,7 @@ type RecordRepository interface {
 	Create(ctx context.Context, record *model.Record) error
 	GetByID(ctx context.Context, id string) (*model.Record, error)
 	GetLastByDevice(ctx context.Context, device string) (*model.Record, error)
+	GetAllByDevice(ctx context.Context, device string) ([]model.Record, error)
 	GetDevice(ctx context.Context) (*[]string, error)
 	Update(ctx context.Context, record *model.Record) error
 }
@@ -50,6 +51,18 @@ func (r *recordRepository) GetLastByDevice(ctx context.Context, device string) (
 		return nil, err
 	}
 	return &record, nil
+}
+
+func (r *recordRepository) GetAllByDevice(ctx context.Context, device string) ([]model.Record, error) {
+	var record []model.Record
+	err := r.db.WithContext(ctx).Model(model.Record{}).Order("updated_time DESC").Where("device = ?", device).Scan(&record).Error
+	if err != nil {
+		if errors.Is(err, gorm.ErrRecordNotFound) {
+			return nil, nil
+		}
+		return nil, err
+	}
+	return record, nil
 }
 
 func (r *recordRepository) Update(ctx context.Context, record *model.Record) error {

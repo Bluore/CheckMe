@@ -20,3 +20,12 @@ type DeviceRecord struct {
 type GetLastRecordResponse struct {
 	DeviceList []DeviceRecord `json:"device_list"`
 }
+
+type DeviceRecordList struct {
+	DeviceName string         `json:"device_name"`
+	Record     []DeviceRecord `json:"record"`
+}
+
+type GetHistoryRecord struct {
+	List []DeviceRecordList `json:"list"`
+}

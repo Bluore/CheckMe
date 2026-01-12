@@ -58,3 +58,14 @@ func (h *Handler) GetLastRecord(c *gin.Context) {
 
 	response.Success(c, devices)
 }
+
+// GetHistoryRecord 获取在线历史记录
+func (h *Handler) GetHistoryRecord(c *gin.Context) {
+	res, err := h.recordService.GetHistoryRecord(c)
+	if err != nil {
+		response.Fail(c, response.ServerError)
+		return
+	}
+
+	response.Success(c, res)
+}

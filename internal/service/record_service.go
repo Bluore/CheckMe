@@ -15,6 +15,7 @@ import (
 type RecordService interface {
 	Update(ctx context.Context, req *dto.UploadRecordRequest) error
 	GetLastRecord(ctx context.Context) (*dto.GetLastRecordResponse, error)
+	GetHistoryRecord(ctx context.Context) (*dto.GetHistoryRecord, error)
 }
 
 type recordService struct {
@@ -36,7 +37,8 @@ func (rs recordService) Update(ctx context.Context, req *dto.UploadRecordRequest
 	}
 
 	// 更新记录
-	if record != nil && record.Application == req.Application {
+	if record != nil && record.Application == req.Application &&
+		req.Time.Sub(record.UpdatedTime).Minutes() < 5.0 {
 		// 当仍在上个应用时更新时长
 		record.UpdatedTime = *req.Time
 		if record.UpdatedTime.Sub(record.StartTime).Minutes() < 0 {
@@ -51,7 +53,7 @@ func (rs recordService) Update(ctx context.Context, req *dto.UploadRecordRequest
 		// 切换应用时添加记录
 		startTime := req.Time.Add(-5 * time.Minute)
 		if record != nil {
-			if req.Time.Sub(record.StartTime).Minutes() <= 5.0 {
+			if req.Time.Sub(record.UpdatedTime).Minutes() <= 5.0 {
 				startTime = record.UpdatedTime
 			} else if req.Time.Sub(record.StartTime).Minutes() < 0 {
 				return errors.New("时间错误，请检查时区")
@@ -100,6 +102,30 @@ func (rs recordService) GetLastRecord(ctx context.Context) (*dto.GetLastRecordRe
 				device.ToDeviceRecord(),
 			)
 		}
+	}
+
+	return &res, nil
+}
+
+func (rs recordService) GetHistoryRecord(ctx context.Context) (*dto.GetHistoryRecord, error) {
+	var res dto.GetHistoryRecord
+	for _, v := range []string{"phone", "computer"} {
+		records, err := rs.recordRepo.GetAllByDevice(ctx, v)
+		if err != nil {
+			return nil, err
+		}
+
+		var devicLis []dto.DeviceRecord
+		for _, rec := range records {
+			devicLis = append(devicLis, rec.ToDeviceRecord())
+		}
+
+		res.List = append(res.List,
+			dto.DeviceRecordList{
+				DeviceName: v,
+				Record:     devicLis,
+			},
+		)
 	}
 
 	return &res, nil

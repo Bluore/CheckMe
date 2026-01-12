@@ -23,6 +23,7 @@ func Setup(r *gin.Engine, h *handler.Handler, cfg *config.Config) {
 		recordGuest := v1.Group("/guest")
 		{
 			recordGuest.GET("/record", h.GetLastRecord)
+			recordGuest.GET("/history", h.GetHistoryRecord)
 		}
 	}
 }
