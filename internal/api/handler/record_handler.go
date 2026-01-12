@@ -39,7 +39,7 @@ func (h *Handler) UploadRecord(c *gin.Context) {
 		return
 	}
 
-	err := h.recordService.Update(c, &req)
+	err := h.recordService.Update(c, &req, c.ClientIP())
 	if err != nil {
 		response.Fail(c, response.ServerError)
 		return

@@ -4,6 +4,7 @@ import (
 	"checkme/internal/model"
 	"context"
 	"errors"
+	"time"
 
 	"gorm.io/gorm"
 )
@@ -13,6 +14,7 @@ type RecordRepository interface {
 	GetByID(ctx context.Context, id string) (*model.Record, error)
 	GetLastByDevice(ctx context.Context, device string) (*model.Record, error)
 	GetAllByDevice(ctx context.Context, device string) ([]model.Record, error)
+	GetAllByDeviceAfterDate(ctx context.Context, device string, date time.Time) ([]model.Record, error)
 	GetDevice(ctx context.Context) (*[]string, error)
 	Update(ctx context.Context, record *model.Record) error
 }
@@ -56,6 +58,18 @@ func (r *recordRepository) GetLastByDevice(ctx context.Context, device string) (
 func (r *recordRepository) GetAllByDevice(ctx context.Context, device string) ([]model.Record, error) {
 	var record []model.Record
 	err := r.db.WithContext(ctx).Model(model.Record{}).Order("updated_time DESC").Where("device = ?", device).Scan(&record).Error
+	if err != nil {
+		if errors.Is(err, gorm.ErrRecordNotFound) {
+			return nil, nil
+		}
+		return nil, err
+	}
+	return record, nil
+}
+
+func (r *recordRepository) GetAllByDeviceAfterDate(ctx context.Context, device string, date time.Time) ([]model.Record, error) {
+	var record []model.Record
+	err := r.db.WithContext(ctx).Model(model.Record{}).Order("updated_time DESC").Where("device = ?", device).Where("updated_time > ?", date).Scan(&record).Error
 	if err != nil {
 		if errors.Is(err, gorm.ErrRecordNotFound) {
 			return nil, nil

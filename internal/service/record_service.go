@@ -13,9 +13,9 @@ import (
 )
 
 type RecordService interface {
-	Update(ctx context.Context, req *dto.UploadRecordRequest) error
+	Update(ctx context.Context, req *dto.UploadRecordRequest, ip string) error
 	GetLastRecord(ctx context.Context) (*dto.GetLastRecordResponse, error)
-	GetHistoryRecord(ctx context.Context) (*dto.GetHistoryRecord, error)
+	GetHistoryRecord(ctx context.Context) (*dto.GetHistoryRecordResponse, error)
 }
 
 type recordService struct {
@@ -30,7 +30,7 @@ func NewRecoderService(recoderRepo repository.RecordRepository, cfg *config.Conf
 	}
 }
 
-func (rs recordService) Update(ctx context.Context, req *dto.UploadRecordRequest) error {
+func (rs recordService) Update(ctx context.Context, req *dto.UploadRecordRequest, ip string) error {
 	record, err := rs.recordRepo.GetLastByDevice(ctx, req.Device)
 	if err != nil {
 		return errors.New("数据库查询出错")
@@ -44,6 +44,8 @@ func (rs recordService) Update(ctx context.Context, req *dto.UploadRecordRequest
 		if record.UpdatedTime.Sub(record.StartTime).Minutes() < 0 {
 			return errors.New("时间错误，请检查时区")
 		}
+
+		record.Ip = ip
 
 		err := rs.recordRepo.Update(ctx, record)
 		if err != nil {
@@ -65,6 +67,8 @@ func (rs recordService) Update(ctx context.Context, req *dto.UploadRecordRequest
 			Application: req.Application,
 			UpdatedTime: *req.Time,
 			StartTime:   startTime,
+			Ip:          ip,
+			Data:        req.Data,
 			DeletedAt:   gorm.DeletedAt{},
 		}
 
@@ -107,10 +111,10 @@ func (rs recordService) GetLastRecord(ctx context.Context) (*dto.GetLastRecordRe
 	return &res, nil
 }
 
-func (rs recordService) GetHistoryRecord(ctx context.Context) (*dto.GetHistoryRecord, error) {
-	var res dto.GetHistoryRecord
+func (rs recordService) GetHistoryRecord(ctx context.Context) (*dto.GetHistoryRecordResponse, error) {
+	var res dto.GetHistoryRecordResponse
 	for _, v := range []string{"phone", "computer"} {
-		records, err := rs.recordRepo.GetAllByDevice(ctx, v)
+		records, err := rs.recordRepo.GetAllByDeviceAfterDate(ctx, v, time.Now().Add(-24*time.Hour))
 		if err != nil {
 			return nil, err
 		}

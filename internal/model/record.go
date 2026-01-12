@@ -4,6 +4,7 @@ import (
 	"checkme/internal/dto"
 	"time"
 
+	"gorm.io/datatypes"
 	"gorm.io/gorm"
 )
 
@@ -13,10 +14,12 @@ type Record struct {
 	Application string         `json:"application" gorm:"varchar(255)"`
 	UpdatedTime time.Time      `json:"updated_time"`
 	StartTime   time.Time      `json:"start_time"`
+	Ip          string         `json:"ip"`
+	Data        datatypes.JSON `gorm:"type:json"`
 	DeletedAt   gorm.DeletedAt `gorm:"index"`
 }
 
-func (Record) TableName() string {
+func (r *Record) TableName() string {
 	return "records"
 }
 
