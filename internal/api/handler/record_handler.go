@@ -3,12 +3,14 @@ package handler
 import (
 	"checkme/internal/dto"
 	"checkme/internal/service"
+	"checkme/pkg/judge"
 	"checkme/pkg/response"
 	"fmt"
 	"time"
 
 	"github.com/gin-gonic/gin"
 	"github.com/gin-gonic/gin/binding"
+	"gorm.io/datatypes"
 )
 
 type Handler struct {
@@ -37,6 +39,11 @@ func (h *Handler) UploadRecord(c *gin.Context) {
 	if req.Device != "phone" && req.Device != "computer" {
 		response.Error(c, 400, "不支持的设备")
 		return
+	}
+
+	// 解决null问题
+	if judge.IsJSONNull(req.Data) {
+		req.Data = datatypes.JSON(`{}`)
 	}
 
 	err := h.recordService.Update(c, &req, c.ClientIP())

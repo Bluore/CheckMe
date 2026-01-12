@@ -2,6 +2,7 @@ package model
 
 import (
 	"checkme/internal/dto"
+	"checkme/pkg/judge"
 	"time"
 
 	"gorm.io/datatypes"
@@ -24,10 +25,15 @@ func (r *Record) TableName() string {
 }
 
 func (r *Record) ToDeviceRecord() dto.DeviceRecord {
-	return dto.DeviceRecord{
+	res := dto.DeviceRecord{
 		Device:      r.Device,
 		Application: r.Application,
 		StartTime:   r.StartTime,
 		UpdateTime:  r.UpdatedTime,
+		Data:        r.Data,
 	}
+	if judge.IsJSONNull(res.Data) {
+		res.Data = datatypes.JSON(`{}`)
+	}
+	return res
 }
