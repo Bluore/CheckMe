@@ -1,0 +1,15 @@
+ai.x.grok:
+  app_name: "Grok Ai"
+  description: "正在使用Ai工具"
+
+android:
+  app_name: "系统桌面"
+  description: "正在挂机"
+
+bin.mt.plus:
+  app_name: "MT资源管理器"
+  description: ""
+
+goland:
+  app_name: "Golang开发工具"
+  description: "正在解锁前面的区域φ(゜▽゜*)♪"

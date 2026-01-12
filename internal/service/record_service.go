@@ -5,6 +5,7 @@ import (
 	"checkme/internal/dto"
 	"checkme/internal/model"
 	"checkme/internal/repository"
+	"checkme/pkg/change"
 	"context"
 	"errors"
 	"time"
@@ -21,12 +22,14 @@ type RecordService interface {
 type recordService struct {
 	recordRepo repository.RecordRepository
 	cfg        *config.Config
+	cov        *map[string]map[string]interface{}
 }
 
-func NewRecoderService(recoderRepo repository.RecordRepository, cfg *config.Config) RecordService {
+func NewRecoderService(recoderRepo repository.RecordRepository, cfg *config.Config, cov *map[string]map[string]interface{}) RecordService {
 	return &recordService{
 		recordRepo: recoderRepo,
 		cfg:        cfg,
+		cov:        cov,
 	}
 }
 
@@ -34,6 +37,11 @@ func (rs recordService) Update(ctx context.Context, req *dto.UploadRecordRequest
 	record, err := rs.recordRepo.GetLastByDevice(ctx, req.Device)
 	if err != nil {
 		return errors.New("数据库查询出错")
+	}
+
+	data, err := change.ChangeData(rs.cov, req.Data, req.Application)
+	if err != nil {
+		return err
 	}
 
 	// 更新记录
@@ -46,6 +54,7 @@ func (rs recordService) Update(ctx context.Context, req *dto.UploadRecordRequest
 		}
 
 		record.Ip = ip
+		record.Data = data
 
 		err := rs.recordRepo.Update(ctx, record)
 		if err != nil {
@@ -68,7 +77,7 @@ func (rs recordService) Update(ctx context.Context, req *dto.UploadRecordRequest
 			UpdatedTime: *req.Time,
 			StartTime:   startTime,
 			Ip:          ip,
-			Data:        req.Data,
+			Data:        data,
 			DeletedAt:   gorm.DeletedAt{},
 		}
 

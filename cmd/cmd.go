@@ -20,6 +20,11 @@ func Start() {
 		panic(fmt.Sprintf("读取配置文件失败：%v", err))
 	}
 
+	cov, err := config.InitCovert()
+	if err != nil {
+		panic(fmt.Sprintf("读取covert.yaml出现问题: %v", err))
+	}
+
 	//连接数据库
 	var db *gorm.DB
 	db, err = config.InitMysql(conf)
@@ -31,7 +36,7 @@ func Start() {
 	//创建仓库层
 	recordRepo := repository.NewUserRepository(db)
 	//创建服务层
-	recordService := service.NewRecoderService(recordRepo, conf)
+	recordService := service.NewRecoderService(recordRepo, conf, cov)
 	//创建处理器
 	h := handler.NewHandler(recordService)
 
