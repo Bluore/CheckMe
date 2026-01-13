@@ -26,11 +26,10 @@ func (r *Record) TableName() string {
 
 func (r *Record) ToDeviceRecord() dto.DeviceRecord {
 	res := dto.DeviceRecord{
-		Device:      r.Device,
-		Application: r.Application,
-		StartTime:   r.StartTime,
-		UpdateTime:  r.UpdatedTime,
-		Data:        r.Data,
+		Device:     r.Device,
+		StartTime:  r.StartTime,
+		UpdateTime: r.UpdatedTime,
+		Data:       r.Data,
 	}
 	if judge.IsJSONNull(res.Data) {
 		res.Data = datatypes.JSON(`{}`)

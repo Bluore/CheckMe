@@ -14,11 +14,10 @@ type UploadRecordRequest struct {
 }
 
 type DeviceRecord struct {
-	Device      string         `json:"device"`
-	Application string         `json:"application"`
-	StartTime   time.Time      `json:"start_time"`
-	UpdateTime  time.Time      `json:"update_time"`
-	Data        datatypes.JSON `json:"data"`
+	Device     string         `json:"device"`
+	StartTime  time.Time      `json:"start_time"`
+	UpdateTime time.Time      `json:"update_time"`
+	Data       datatypes.JSON `json:"data"`
 }
 
 type GetLastRecordResponse struct {

@@ -104,10 +104,9 @@ func (rs recordService) GetLastRecord(ctx context.Context) (*dto.GetLastRecordRe
 		if device == nil {
 			res.DeviceList = append(res.DeviceList,
 				dto.DeviceRecord{
-					Device:      v,
-					Application: "没有相关记录",
-					StartTime:   time.Time{},
-					UpdateTime:  time.Time{},
+					Device:     v,
+					StartTime:  time.Time{},
+					UpdateTime: time.Time{},
 				},
 			)
 		} else {
@@ -123,12 +122,13 @@ func (rs recordService) GetLastRecord(ctx context.Context) (*dto.GetLastRecordRe
 func (rs recordService) GetHistoryRecord(ctx context.Context) (*dto.GetHistoryRecordResponse, error) {
 	var res dto.GetHistoryRecordResponse
 	for _, v := range []string{"phone", "computer"} {
-		records, err := rs.recordRepo.GetAllByDeviceAfterDate(ctx, v, time.Now().Add(-24*time.Hour))
+		records, err := rs.recordRepo.GetAllByDeviceAfterDate(ctx, v, time.Now().Add(-2*time.Hour))
 		if err != nil {
 			return nil, err
 		}
 
-		var devicLis []dto.DeviceRecord
+		//var devicLis []dto.DeviceRecord
+		devicLis := make([]dto.DeviceRecord, 0)
 		for _, rec := range records {
 			devicLis = append(devicLis, rec.ToDeviceRecord())
 		}

@@ -25,7 +25,7 @@ func ChangeData(ctx context.Context, cov *map[string]map[string]interface{}, req
 	}
 
 	// 异步查询IP属地
-	ch := request.GetIPLocationWithCtx(ctx, "162.141.131.115")
+	ch := request.GetIPLocationWithCtx(ctx, ip)
 
 	for key, val := range conf {
 		data[key] = val
