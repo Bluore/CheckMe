@@ -1,15 +1,168 @@
 ai.x.grok:
   app_name: "Grok Ai"
-  description: "正在使用Ai工具"
+  description: "正在和Grok Ai对线"
 
 android:
   app_name: "系统桌面"
-  description: "正在挂机"
+  description: "正在挂机。。。"
+
+com.android.launcher:
+  app_name: "系统桌面"
+  description: "可能已经睡觉啰 (_　_)。゜zｚＺ"
 
 bin.mt.plus:
   app_name: "MT资源管理器"
-  description: ""
+  description: "即使是用手机也要写好代码"
+
+tv.danmaku.bili:
+  app_name: "哔哩哔哩"
+  description: "要么在上课，要么在厕所刷B站 ＞︿＜"
+
+com.alibaba.android.rimet:
+  app_name: "钉钉"
+  description: "正在完成钉钉任务"
+
+mark.via:
+  app_name: "Via浏览器"
+  description: "这是手机上最好的浏览器了"
+
+com.tencent.mobileqq:
+  app_name: "QQ"
+  description: "正在吃💩 正在搬💩"
+
+com.suda.yzune.wakeupschedule:
+  app_name: "课表"
+  description: "今天逃哪节课呢？（￣▽￣）"
+
+com.taobao.takbao:
+  app_name: "淘宝"
+  description: "剁手中。。。(￣︶￣)"
+
+com.github.android:
+  app_name: "GitHub客户端"
+  description: "什么时候才能成为开源dalao啊？( 超想(ง •_•)ง"
 
 goland:
   app_name: "Golang开发工具"
   description: "正在解锁前面的区域φ(゜▽゜*)♪"
+
+goland64.exe:
+  app_name: "Golang开发工具"
+  description: "正在解锁前面的区域φ(゜▽゜*)♪"
+
+DingTalk.exe:
+  app_name: "钉钉"
+  description: "正在完成钉钉任务"
+
+Code.exe:
+  app_name: "Visual Studio Code"
+  description: "正在编写世界 Let't build from here 🌍"
+
+firefox.exe:
+  app_name: "Firefox浏览器"
+  description: "正在浏览世间一切美好事物"
+
+QQMusic.exe:
+  app_name: "QQ音乐"
+  description: "正在聆听美妙的音乐"
+
+Weixin.exe:
+  app_name: "微信"
+  description: "似乎在聊正经事儿"
+
+QQ.exe:
+  app_name: "QQ"
+  description: "正在思考如何回复🤔"
+
+notepad++.exe:
+  app_name: "Notepad++"
+  description: "记录我的临时草稿"
+
+python.exe:
+  app_name: "Python解释器"
+  description: "人生苦短，我用Python"
+
+explorer.exe:
+  app_name: "文件资源管理器"
+  description: "正在整理文件夹"
+
+cmd.exe:
+  app_name: "命令提示符"
+  description: "正在执行命令"
+
+powershell.exe:
+  app_name: "PowerShell"
+  description: "正在执行脚本任务"
+
+EXCEL.EXE:
+  app_name: "Microsoft Excel"
+  description: "正在处理数据表格"
+
+navigator.exe:
+  app_name: "数据库浏览器"
+  description: "TMD，数据库又崩了！ （︶^︶）"
+
+obsidian.exe:
+  app_name: "Obsidian笔记"
+  description: "正在整理我的知识库"
+
+steam.exe:
+  app_name: "Steam游戏平台"
+  description: "来和 oneekac 一起玩吧！"
+
+Taskmgr.exe:
+  app_name: "任务管理器"
+  description: "可恶，又是哪个进程占用了这么多资源！"
+
+v2rayN.exe:
+  app_name: "v2rayN"
+  description: "机长起飞，🛫..."
+
+FocusWindowMonitor.exe:
+  app_name: "FocusWindow监控"
+  description: "视奸我的每一刻"
+
+XTerminal.exe:
+  app_name: "XTerminal终端"
+  description: "正在和服务器斗智斗勇ヽ（≧□≦）ノ"
+
+WindowsTerminal.exe:
+  app_name: "Windows终端"
+  description: "小小终端，大大世界"
+
+Apifox.exe:
+  app_name: "ApiFox接口调试"
+  description: "正在调试接口，别打扰我！(* ￣︿￣)"
+
+Postman.exe:
+  app_name: "Postman接口调试"
+  description: "正在调试接口，别打扰我！(* ￣︿￣)"
+
+Typora.exe:
+  app_name: "Typora写作工具"
+  description: "记笔记 记笔记 U_U"
+
+coodesker-x64.exe:
+  app_name: "Coodesker桌面管理"
+  description: "哈哈 我的桌面太好看了！我要看一辈子我的桌面 <(￣︶￣)↗[LOOK!]>"
+
+哔哩哔哩.exe:
+  app_name: "哔哩哔哩"
+  description: "哔哩哔哩 (゜-゜)つロ 干杯~-bilibili"
+  is_hide_music: true
+
+chrome.exe:
+  app_name: "谷歌浏览器"
+  description: "正在做Web开发 哎，真脱发"
+
+PotPlayerMini64.exe:
+  app_name: "PotPlayer播放器"
+  description: "正在看什么电影呢？"
+
+wegame.exe:
+  app_name: "WeGame游戏平台"
+  description: "菜逼，求带飞！"
+
+LeagueClientUx.exe:
+  app_name: "英雄联盟客户端"
+  description: "冲呀！斯莫德！！！ <(￣︶￣)↗[GO!]"

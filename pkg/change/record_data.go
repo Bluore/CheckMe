@@ -41,7 +41,7 @@ func ChangeData(ctx context.Context, cov *map[string]map[string]interface{}, req
 			// 成功查询IP属地
 			data["location"] = res.Location
 		}
-	case <-time.After(1500 * time.Millisecond):
+	case <-time.After(3000 * time.Millisecond):
 		// IP属地查询超时
 		fmt.Println(fmt.Sprintf("IP 查询超时: %s", ip))
 	}
