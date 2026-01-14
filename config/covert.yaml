@@ -26,9 +26,17 @@ mark.via:
   app_name: "Via浏览器"
   description: "这是手机上最好的浏览器了"
 
+org.mozilla.firefox:
+  app_name: "Firefox浏览器"
+  description: "互联网从这里开始"
+
 com.tencent.mobileqq:
   app_name: "QQ"
   description: "正在吃💩 正在搬💩"
+
+com.tencent.mm:
+  app_name: "微信"
+  description: "正在和朋友聊天"
 
 com.suda.yzune.wakeupschedule:
   app_name: "课表"
@@ -41,6 +49,34 @@ com.taobao.takbao:
 com.github.android:
   app_name: "GitHub客户端"
   description: "什么时候才能成为开源dalao啊？( 超想(ง •_•)ง"
+
+com.youdao.translator:
+  app_name: "有道翻译官"
+  description: "正在翻译。。。"
+
+com.oplus.securitypermission:
+  app_name: "系统安全中心"
+  description: "保护手机安全，防止病毒入侵"
+
+com.tencent.pokemonunite.cn:
+  app_name: "宝可梦大集结"
+  description: "集结吧！训练家！٩(˃̶͈̀௰˂̶͈́)و"
+
+org.telegram.messenger:
+  app_name: "TG"
+  description: "正在隐藏身份。。。"
+
+com.openai.chatgpt:
+  app_name: "ChatGPT"
+  description: "正在和ChatGPT对线"
+
+com.ss.android.ugc.aweme:
+  app_name: "抖音"
+  description: "记录美好生活 (•̀ᴗ•́)و ̑̑"
+
+unknown:
+  app_name: "未知应用"
+  description: "正在使用未知应用"
 
 goland:
   app_name: "Golang开发工具"
@@ -166,3 +202,11 @@ wegame.exe:
 LeagueClientUx.exe:
   app_name: "英雄联盟客户端"
   description: "冲呀！斯莫德！！！ <(￣︶￣)↗[GO!]"
+
+vmware.exe:
+  app_name: "VMWare"
+  description: "正在运行虚拟机 ( •_•)>⌐■-■ (⌐■_■)"
+
+OneCommander.exe:
+  app_name: "OneCommander文件管理器"
+  description: "正在整理文件夹"

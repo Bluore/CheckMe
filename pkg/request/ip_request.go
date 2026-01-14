@@ -15,7 +15,7 @@ type IPLocationResult struct {
 }
 
 func QueryIP(ip string) (map[string]interface{}, error) {
-	url := fmt.Sprintf("http://ip-api.com/json?ip=%s", ip)
+	url := fmt.Sprintf("http://ip-api.com/json/%s?lang=zh-CN", ip)
 
 	// 发送GET请求
 	resp, err := http.Get(url)
@@ -42,7 +42,7 @@ func QueryIP(ip string) (map[string]interface{}, error) {
 
 func GetIPLocation(ip string) (string, error) {
 	data, err := QueryIP(ip)
-	if err != nil {
+	if err != nil || data["status"] == "fail" {
 		return "归属地查询失败", err
 	}
 	res := fmt.Sprintf("%s %s %s", data["country"], data["regionName"], data["city"])
