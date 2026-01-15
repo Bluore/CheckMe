@@ -138,6 +138,10 @@ navigator.exe:
   app_name: "数据库浏览器"
   description: "TMD，数据库又崩了！ （︶^︶）"
 
+navicat.exe:
+  app_name: "数据库浏览器"
+  description: "TMD，数据库又崩了！ （︶^︶）"
+
 obsidian.exe:
   app_name: "Obsidian笔记"
   description: "正在整理我的知识库"
@@ -211,7 +215,91 @@ OneCommander.exe:
   app_name: "OneCommander文件管理器"
   description: "正在整理文件夹"
 
-test:
-  app_name: "测试"
-  description: "这是一个测试"
+java.exe:
+  app_name: "Minecraft"
+  description: "一起来玩啊！(ง •_•)ง id:Bluore"
+
+Plain Craft Launcher 2.exe:
+  app_name: "Minecraft启动器"
+  description: "Minecraft 启动! 准备进入方块世界！"
+
+lghub.exe:
+  app_name: "Logitech G HUB"
+  description: "正在调整鼠标键盘灯光效果"
+
+PixPin.exe:
+  app_name: "PixPin"
+  description: "善用截图软件 保护读者眼镜 👀"
+
+test1:
+  app_name: "disable测试"
+  description: "disable测试"
   is_disable: true
+
+test2:
+  app_name: "列表随机测试"
+  description:
+    - "1"
+    - "2"
+    - "3"
+    - "4"
+
+test3:
+  app_name: "权重随机测试"
+  description:
+    2: "2/3"
+    1: "1/3"
+
+test4:
+  app_name: "日期测试"
+  description:
+    <-: "12:45之前"
+    12:45-13:50: "12:45-13:50之间"
+    ->: "13:50之后"
+
+test5:
+  app_name: "文本和配置拷贝测试"
+  description:
+    text: "测试3: "
+    copy_by: "test3"
+
+test6:
+  app_name: "套娃测试"
+  description:
+#    text_1: "test: "
+#    text_2:
+      <-:
+        - "早于12:00的随机数1"
+        - "早于12:00的随机数2"
+      12:00-19:00:
+        99: "当前时间在12:00-19:00之间"
+        1:
+          <-:
+            - "运气够了，时机没对"
+            - "来早了"
+          15:00-15:00: "你是幸运之星"
+          ->:
+            - "来晚了"
+            - copy_by: "test1"
+      ->: "下次早点来"
+
+
+test:
+  app_name: "综合测试"
+  description:
+    text_1: "综合测试"
+    text_1_1: " test1:"
+    text_1_2:
+      copy_by: "test1"
+    text_2_1: " test2:"
+    text_2_2:
+      copy_by: "test2"
+    text_3_1: " test3:"
+    text_3_2:
+      copy_by: "test3"
+    text_4_1: " test4:"
+    text_4_2:
+      copy_by: "test4"
+    text_5_1: " test5:"
+    text_5_2:
+      copy_by: "test5"
