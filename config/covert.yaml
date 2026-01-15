@@ -210,3 +210,8 @@ vmware.exe:
 OneCommander.exe:
   app_name: "OneCommander文件管理器"
   description: "正在整理文件夹"
+
+test:
+  app_name: "测试"
+  description: "这是一个测试"
+  is_disable: true

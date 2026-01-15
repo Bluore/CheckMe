@@ -3,8 +3,10 @@ package handler
 import (
 	"checkme/internal/dto"
 	"checkme/internal/service"
+	"checkme/pkg/change"
 	"checkme/pkg/judge"
 	"checkme/pkg/response"
+	"errors"
 	"fmt"
 	"time"
 
@@ -47,6 +49,11 @@ func (h *Handler) UploadRecord(c *gin.Context) {
 	}
 
 	err := h.recordService.Update(c, &req, c.ClientIP())
+	if errors.Is(err, change.DataDisable) {
+		response.SuccessWithMsg(c, "已忽略请求", nil)
+		return
+	}
+
 	if err != nil {
 		response.Fail(c, response.ServerError)
 		return

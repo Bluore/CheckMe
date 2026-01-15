@@ -39,6 +39,14 @@ func Success(c *gin.Context, data interface{}) {
 	c.JSON(http.StatusOK, StatusOK.ToResponse(data))
 }
 
+func SuccessWithMsg(c *gin.Context, msg string, data interface{}) {
+	c.JSON(http.StatusOK, Response{
+		Code:    200,
+		Message: msg,
+		Data:    data,
+	})
+}
+
 func Error(c *gin.Context, code int, msg string) {
 	c.JSON(http.StatusOK, Response{
 		Code:    code,

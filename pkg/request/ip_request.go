@@ -3,6 +3,7 @@ package request
 import (
 	"context"
 	"encoding/json"
+	"errors"
 	"fmt"
 	"io"
 	"net/http"
@@ -42,9 +43,13 @@ func QueryIP(ip string) (map[string]interface{}, error) {
 
 func GetIPLocation(ip string) (string, error) {
 	data, err := QueryIP(ip)
-	if err != nil || data["status"] == "fail" {
+	if err != nil {
 		return "归属地查询失败", err
 	}
+	if data["status"] == "fail" {
+		return "归属地查询失败", errors.New(data["message"].(string))
+	}
+
 	res := fmt.Sprintf("%s %s %s", data["country"], data["regionName"], data["city"])
 
 	return res, err

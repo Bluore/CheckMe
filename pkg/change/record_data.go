@@ -5,10 +5,15 @@ import (
 	"checkme/pkg/request"
 	"context"
 	"encoding/json"
+	"errors"
 	"fmt"
 	"time"
 
 	"gorm.io/datatypes"
+)
+
+var (
+	DataDisable = errors.New("disable 该应用")
 )
 
 func ChangeData(ctx context.Context, cov *map[string]map[string]interface{}, req *dto.UploadRecordRequest, ip string) (datatypes.JSON, error) {
@@ -22,6 +27,10 @@ func ChangeData(ctx context.Context, cov *map[string]map[string]interface{}, req
 	err := json.Unmarshal(req.Data, &data)
 	if err != nil {
 		return nil, err
+	}
+
+	if data["is_disable"] == true {
+		return nil, DataDisable
 	}
 
 	// 异步查询IP属地
