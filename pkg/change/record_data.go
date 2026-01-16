@@ -31,7 +31,8 @@ func ChangeData(ctx context.Context, cov *map[string]map[string]interface{}, req
 		return nil, err
 	}
 
-	if data["is_disable"] == true {
+	// 忽略请求
+	if v, ok := data["is_disable"]; ok && v == true {
 		return nil, DataDisable
 	}
 

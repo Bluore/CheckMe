@@ -1,6 +1,8 @@
 ai.x.grok:
   app_name: "Grok Ai"
-  description: "正在和Grok Ai对线"
+  description: 
+    - "正在和Ai对线"
+    - "Ai实在太好用了，你知道吗？"
 
 android:
   app_name: "系统桌面"
@@ -9,6 +11,7 @@ android:
 com.android.launcher:
   app_name: "系统桌面"
   description: "可能已经睡觉啰 (_　_)。゜zｚＺ"
+  is_disable: true
 
 bin.mt.plus:
   app_name: "MT资源管理器"
@@ -20,7 +23,10 @@ tv.danmaku.bili:
 
 com.alibaba.android.rimet:
   app_name: "钉钉"
-  description: "正在完成钉钉任务"
+  description: 
+    - "正在完成钉钉任务"
+    - "努力工作，认真钉钉！( •_•)>⌐■-■ (⌐■_■)"
+    - copy_by: "com.tencent.mobileqq"
 
 mark.via:
   app_name: "Via浏览器"
@@ -32,11 +38,17 @@ org.mozilla.firefox:
 
 com.tencent.mobileqq:
   app_name: "QQ"
-  description: "正在吃💩 正在搬💩"
+  description: 
+    - "正在吃💩 正在搬💩"
+    - "忙着和朋友聊天呢！( •_•)>⌐■-■ (⌐■_■)"
+    - "正在思考如何回复🤔"
+    - "正在处理大量消息📨"
+    - "说不定我在已读不回呢"
 
 com.tencent.mm:
   app_name: "微信"
-  description: "正在和朋友聊天"
+  description: 
+    copy_by: "com.tencent.mobileqq"
 
 com.suda.yzune.wakeupschedule:
   app_name: "课表"
@@ -68,7 +80,8 @@ org.telegram.messenger:
 
 com.openai.chatgpt:
   app_name: "ChatGPT"
-  description: "正在和ChatGPT对线"
+  description: 
+    - copy_by: "ai.x.grok"
 
 com.ss.android.ugc.aweme:
   app_name: "抖音"
@@ -80,11 +93,14 @@ unknown:
 
 goland:
   app_name: "Golang开发工具"
-  description: "正在解锁前面的区域φ(゜▽゜*)♪"
+  description: 
+    - "正在解锁前面的区域φ(゜▽゜*)♪"
+    - copy_by: "Code.exe"
 
 goland64.exe:
   app_name: "Golang开发工具"
-  description: "正在解锁前面的区域φ(゜▽゜*)♪"
+  description:
+    copy_by: "goland"
 
 DingTalk.exe:
   app_name: "钉钉"
@@ -92,23 +108,42 @@ DingTalk.exe:
 
 Code.exe:
   app_name: "Visual Studio Code"
-  description: "正在编写世界 Let't build from here 🌍"
+  description: 
+    - "正在编写世界 Let't build from here 🌍"
+    - "微软大战代码！ Microsoft VS Code 💻"
+    - 
+      <-: "今晚和代码决一死战！"
+      6:00-12:00: "美好的一天从coding开始！"
+      12:00-21:00: "享受编程的乐趣吧！"
+      ->: "正在修复一个bug，哎"
+      1: ""
 
 firefox.exe:
   app_name: "Firefox浏览器"
-  description: "正在浏览世间一切美好事物"
+  description: 
+    - "探索互联网的无限可能"
+    - "互联网精神的起源"
+    - "正在访问神秘网页"
+    - "正在浏览世间一切美好事物"
+    - "无视风险，继续访问"
 
 QQMusic.exe:
   app_name: "QQ音乐"
-  description: "正在聆听美妙的音乐"
+  description: 
+    - "正在聆听美妙的音乐"
+    - "音乐让生活更美好 🎵"
+    - "🎵~🎶~~~"
 
 Weixin.exe:
   app_name: "微信"
-  description: "似乎在聊正经事儿"
+  description: 
+    - "似乎在聊正经事儿"
+    - copy_by: "com.tencent.mobileqq"
 
 QQ.exe:
   app_name: "QQ"
-  description: "正在思考如何回复🤔"
+  description: 
+    copy_by: "com.tencent.mobileqq"
 
 notepad++.exe:
   app_name: "Notepad++"
@@ -121,6 +156,7 @@ python.exe:
 explorer.exe:
   app_name: "文件资源管理器"
   description: "正在整理文件夹"
+  is_disable: true
 
 cmd.exe:
   app_name: "命令提示符"
@@ -156,11 +192,15 @@ Taskmgr.exe:
 
 v2rayN.exe:
   app_name: "v2rayN"
-  description: "机长起飞，🛫..."
+  description: 
+    - "机长起飞，🛫..."
+    - "起飞啰🛫"
 
 FocusWindowMonitor.exe:
   app_name: "FocusWindow监控"
-  description: "视奸我的每一刻"
+  description: 
+    - "视奸我的每一刻"
+    - "使用python获取当前数据，仓库：github.com/Bluore/CheckMe-Client-Python"
 
 XTerminal.exe:
   app_name: "XTerminal终端"
@@ -193,7 +233,9 @@ coodesker-x64.exe:
 
 chrome.exe:
   app_name: "谷歌浏览器"
-  description: "正在做Web开发 哎，真脱发"
+  description: 
+    - "正在做Web开发 哎，真脱发"
+    - copy_by: "firefox.exe"
 
 PotPlayerMini64.exe:
   app_name: "PotPlayer播放器"
@@ -205,7 +247,9 @@ wegame.exe:
 
 LeagueClientUx.exe:
   app_name: "英雄联盟客户端"
-  description: "冲呀！斯莫德！！！ <(￣︶￣)↗[GO!]"
+  description: 
+    - "冲呀！斯莫德！！！ <(￣︶￣)↗[GO!]"
+    - copy_by: "wegame.exe"
 
 vmware.exe:
   app_name: "VMWare"
@@ -221,15 +265,19 @@ java.exe:
 
 Plain Craft Launcher 2.exe:
   app_name: "Minecraft启动器"
-  description: "Minecraft 启动! 准备进入方块世界！"
+  description: 
+    - "Minecraft 启动! 准备进入方块世界！"
+    - copy_by: "java.exe"
 
 lghub.exe:
   app_name: "Logitech G HUB"
-  description: "正在调整鼠标键盘灯光效果"
+  description: 
+    - "正在调整鼠标键盘灯光效果"
+    - "可恶的驱动，又出问题了！"
 
 PixPin.exe:
   app_name: "PixPin"
-  description: "善用截图软件 保护读者眼镜 👀"
+  description: "善用截图软件 保护眼镜 👀"
 
 test1:
   app_name: "disable测试"
@@ -256,6 +304,7 @@ test4:
     <-: "12:45之前"
     12:45-13:50: "12:45-13:50之间"
     ->: "13:50之后"
+    1: ""
 
 test5:
   app_name: "文本和配置拷贝测试"
@@ -266,8 +315,8 @@ test5:
 test6:
   app_name: "套娃测试"
   description:
-#    text_1: "test: "
-#    text_2:
+    text_1: "test: "
+    text_2:
       <-:
         - "早于12:00的随机数1"
         - "早于12:00的随机数2"
@@ -281,7 +330,9 @@ test6:
           ->:
             - "来晚了"
             - copy_by: "test1"
+          1: ""
       ->: "下次早点来"
+      1: ""
 
 
 test:
