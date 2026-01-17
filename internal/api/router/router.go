@@ -24,6 +24,7 @@ func Setup(r *gin.Engine, h *handler.Handler, cfg *config.Config) {
 		{
 			recordGuest.GET("/record", h.GetLastRecord)
 			recordGuest.GET("/history", h.GetHistoryRecord)
+			recordGuest.POST("/notify", h.CreateNotify)
 		}
 	}
 }

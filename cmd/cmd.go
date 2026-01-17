@@ -37,8 +37,9 @@ func Start() {
 	recordRepo := repository.NewUserRepository(db)
 	//创建服务层
 	recordService := service.NewRecoderService(recordRepo, conf, cov)
+	notifyService := service.NewNotifyService(conf)
 	//创建处理器
-	h := handler.NewHandler(recordService)
+	h := handler.NewHandler(recordService, notifyService)
 
 	//设置Gin模式
 	gin.SetMode(conf.Server.Mode)

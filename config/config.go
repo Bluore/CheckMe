@@ -11,6 +11,7 @@ type Config struct {
 	Server   ServerConfig   `mapstructure:"server"`
 	Database DatabaseConfig `mapstructure:"database"`
 	Auth     AuthConfig     `mapstructure:"auth"`
+	Notify   NotifyConfig   `mapstructure:"notify"`
 }
 
 // ServerConfig 服务器配置
@@ -32,6 +33,10 @@ type DatabaseConfig struct {
 // AuthConfig 配置
 type AuthConfig struct {
 	Token string `mapstructure:"token"`
+}
+
+type NotifyConfig struct {
+	FeishuBot string `mapstructure:"feishu_bot"`
 }
 
 // Load 加载配置

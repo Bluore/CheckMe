@@ -17,10 +17,14 @@ import (
 
 type Handler struct {
 	recordService service.RecordService
+	notifyService service.NotifyService
 }
 
-func NewHandler(recoderService service.RecordService) *Handler {
-	return &Handler{recordService: recoderService}
+func NewHandler(recoderService service.RecordService, notifyService service.NotifyService) *Handler {
+	return &Handler{
+		recordService: recoderService,
+		notifyService: notifyService,
+	}
 }
 
 // UploadRecord 创建记录

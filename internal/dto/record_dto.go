@@ -32,3 +32,8 @@ type DeviceRecordList struct {
 type GetHistoryRecordResponse struct {
 	List []DeviceRecordList `json:"list"`
 }
+
+type CreateNotifyRequest struct {
+	Type string `json:"type" binding:"required"`
+	Msg  string `json:"msg" binding:"max=20"`
+}
