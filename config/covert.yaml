@@ -279,6 +279,13 @@ PixPin.exe:
   app_name: "PixPin"
   description: "善用截图软件 保护眼镜 👀"
 
+LockApp.exe:
+  app_name: "锁屏界面"
+  description: "正在锁屏。。。"
+  is_disable: true
+
+
+
 test1:
   app_name: "disable测试"
   description: "disable测试"

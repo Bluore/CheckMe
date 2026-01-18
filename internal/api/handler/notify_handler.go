@@ -21,5 +21,5 @@ func (h *Handler) CreateNotify(c *gin.Context) {
 		return
 	}
 
-	response.Success(c, response.StatusOK)
+	response.Success(c, nil)
 }
