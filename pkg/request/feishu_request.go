@@ -49,6 +49,7 @@ func NotifyDataOfStudy(cfg *config.Config, c *gin.Context, msg string) (datatype
     "elements": [
       {
         "tag": "div",
+		"collapsible": true,
         "text": {
           "tag": "lark_md",
           "content": "**Sender IP**: *%s* \n**Sender UA**: *%s*"
@@ -103,6 +104,62 @@ func NotifyDataOfGame(cfg *config.Config, c *gin.Context, msg string) (datatypes
       },
       {
         "tag": "div",
+		"collapsible": true,
+        "text": {
+          "tag": "lark_md",
+          "content": "**Sender IP**: *%s* \n**Sender UA**: *%s*"
+        }
+      },
+      {
+        "tag": "action",
+        "actions": [
+          {
+            "tag": "button",
+            "text": {
+              "tag": "plain_text",
+              "content": "查看详情"
+            },
+            "type": "primary",
+            "url": "https://me.bluore.top"
+          }
+        ]
+      }
+    ]
+  }
+}
+`
+	body = fmt.Sprintf(body, msg, c.ClientIP(), c.GetHeader("User-Agent"))
+
+	resp, err := NotifyOnFeishu(cfg.Notify.FeishuBot, body)
+	if err != nil {
+		return nil, err
+	}
+
+	return resp, nil
+}
+
+func NotifyDataOfEncourage(cfg *config.Config, c *gin.Context, msg string) (datatypes.JSON, error) {
+	body := `
+{
+  "msg_type": "interactive",
+  "card": {
+    "header": {
+      "title": {
+        "tag": "plain_text",
+        "content": "加油哦!!!"
+      }
+    },
+    "elements": [
+      {
+        "tag": "div",
+        "text": {
+          "tag": "lark_md",
+          "content": "%s"
+        }
+      },
+      {
+        "tag": "div",
+		"collapsible": true,
         "text": {
           "tag": "lark_md",
           "content": "**Sender IP**: *%s* \n**Sender UA**: *%s*"
@@ -144,6 +201,10 @@ func NotifyFeishu(cfg *config.Config, c *gin.Context, data dto.CreateNotifyReque
 		}
 	case "game":
 		if _, err := NotifyDataOfGame(cfg, c, data.Msg); err != nil {
+			return err
+		}
+	case "encourage":
+		if _, err := NotifyDataOfEncourage(cfg, c, data.Msg); err != nil {
 			return err
 		}
 	default:
