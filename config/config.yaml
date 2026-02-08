@@ -1,0 +1,51 @@
+# =========================
+# 项目配置文件
+# =========================
+# 说明：
+# 1. 本配置文件用于项目运行时读取配置
+# 2. 请根据实际部署环境修改对应参数
+# 3. 请勿将包含敏感信息的配置提交到公开仓库
+# =========================
+
+server:
+  # 服务监听端口
+  port: 8080
+
+  # 运行模式
+  # 可选值：
+  #   - debug   开发模式（日志详细）
+  #   - release 生产模式
+  mode: "debug"
+
+
+database:
+  # 数据库地址
+  host: "127.0.0.1"
+
+  # 数据库端口
+  port: 3306
+
+  # 数据库名称
+  database: "example_db"
+
+  # 数据库用户名
+  username: "root"
+
+  # 数据库密码
+  password: "password"
+
+  # 字符集
+  charset: "utf8mb4"
+
+
+auth:
+  # 接口认证 Token
+  # 用于接口鉴权，请自行生成并妥善保管
+  token: "your-auth-token"
+
+
+notify:
+  # 飞书机器人 Webhook 地址
+  # 示例：
+  # https://open.feishu.cn/open-apis/bot/v2/hook/xxxxxxxx
+  feishu_bot: ""
