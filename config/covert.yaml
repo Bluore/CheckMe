@@ -211,7 +211,9 @@ BetterLyrics.WinUI3.exe:
 
 WindowsTerminal.exe:
   app_name: "终端"
-  description: "正在执行命令"
+  description: 
+    - "正在执行命令"
+    - "与命令行斗智斗勇ヽ（≧□≦）ノ"
 
 v2rayN.exe:
   app_name: "v2rayN"
@@ -228,10 +230,6 @@ FocusWindowMonitor.exe:
 XTerminal.exe:
   app_name: "XTerminal终端"
   description: "正在和服务器斗智斗勇ヽ（≧□≦）ノ"
-
-WindowsTerminal.exe:
-  app_name: "Windows终端"
-  description: "小小终端，大大世界"
 
 Apifox.exe:
   app_name: "ApiFox接口调试"
